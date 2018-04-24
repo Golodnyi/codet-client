@@ -1,17 +1,12 @@
-.fill-remaining-space {
-    flex: 1 1 auto;
-}
-
-mat-autocomplete {
-    width: 120px;
-}
-
-mat-chip {
-    cursor: pointer;
-}
-
 mat-toolbar {
-    height: 86px;
-    position: absolute;
-    bottom: 0;
+    background-color: #353030;
+}
+
+.fill-remaining-space {
+    flex: 0.99 1 auto;
+}
+
+.logo {
+    font-family: 'Gugi', cursive;
+    font-size: 28px;
 }

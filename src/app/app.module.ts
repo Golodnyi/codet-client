@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { EditorComponent } from './editor/editor.component';
 import { AceEditorModule } from 'ng2-ace-editor';
-import { ToolbarComponent } from './toolbar/toolbar.component';
+import { FooterComponent } from './footer/footer.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatChipsModule } from '@angular/material/chips';
@@ -37,6 +37,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { ShareComponent } from './share/share.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EmptyCodeComponent } from './snack-bars/empty-code/empty-code.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { LanguageComponent } from './language/language.component';
+import { PasswordComponent } from './password/password.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 const appRoutes: Routes = [
   { path: '', component: EditorComponent },
@@ -50,13 +54,16 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     EditorComponent,
-    ToolbarComponent,
+    FooterComponent,
     NotfoundComponent,
     ViewComponent,
     ShareComponent,
-    EmptyCodeComponent
+    EmptyCodeComponent,
+    LanguageComponent,
+    PasswordComponent,
+    ToolbarComponent
   ],
-  entryComponents: [EmptyCodeComponent],
+  entryComponents: [EmptyCodeComponent, LanguageComponent, PasswordComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -75,7 +82,8 @@ const appRoutes: Routes = [
     MatIconModule,
     MatListModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]

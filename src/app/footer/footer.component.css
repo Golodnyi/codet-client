@@ -1,0 +1,32 @@
+.fill-remaining-space {
+    flex: 0.99 1 auto;
+}
+
+div {
+    display: flex;
+    background-color: #353030;
+    height: 32px;
+    width: calc(100% - 40px);
+    position: absolute;
+    bottom: 0;
+    padding: 0 0 0 40px;
+    color: #8F938F;
+    line-height: 32px;
+}
+
+.material-icons {
+    line-height: 32px;
+    max-height: 32px;
+    padding: 0;
+    margin: 0;
+}
+
+div a, div a:visited {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.pointer {
+    cursor: pointer;
+    color: #fff;
+}
