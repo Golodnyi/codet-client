@@ -35,6 +35,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { ShareComponent } from './share/share.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const appRoutes: Routes = [
   { path: '', component: EditorComponent },
@@ -70,7 +71,8 @@ const appRoutes: Routes = [
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatInputModule
+    MatInputModule,
+    MatSnackBarModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]
