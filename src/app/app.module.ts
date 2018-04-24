@@ -36,6 +36,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { ShareComponent } from './share/share.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { EmptyCodeComponent } from './snack-bars/empty-code/empty-code.component';
 
 const appRoutes: Routes = [
   { path: '', component: EditorComponent },
@@ -52,8 +53,10 @@ const appRoutes: Routes = [
     ToolbarComponent,
     NotfoundComponent,
     ViewComponent,
-    ShareComponent
+    ShareComponent,
+    EmptyCodeComponent
   ],
+  entryComponents: [EmptyCodeComponent],
   imports: [
     BrowserModule,
     HttpClientModule,

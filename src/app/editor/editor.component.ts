@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { CodeService } from '../services/code.service';
+import { MatSnackBar } from '@angular/material';
+import { EmptyCodeComponent } from '../snack-bars/empty-code/empty-code.component';
 
 @Component({
   selector: 'app-editor',
@@ -14,7 +16,7 @@ export class EditorComponent {
   public pwd: any;
   public code: any;
 
-  constructor(private router: Router, private codeService: CodeService) { }
+  constructor(private router: Router, private codeService: CodeService, public snackBar: MatSnackBar) { }
 
   public changeLanguage(lang: String) {
     this.lang = lang;
@@ -25,7 +27,8 @@ export class EditorComponent {
   }
 
   public save(event: any) {
-    if (!this.code.length) {
+    if (this.code === undefined) {
+      this.openSnackBar();
       return false;
     }
 
@@ -36,5 +39,11 @@ export class EditorComponent {
       error => {
       }
     );
+  }
+
+  public openSnackBar() {
+    this.snackBar.openFromComponent(EmptyCodeComponent, {
+      duration: 500,
+    });
   }
 }
