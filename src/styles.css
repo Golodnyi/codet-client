@@ -1,0 +1,10 @@
+@import "~@angular/material/prebuilt-themes/purple-green.css";
+
+body {
+    margin: 0;
+    background-color: #2C2828;
+}
+
+.mat-chip-list-stacked .mat-chip-list-wrapper .mat-chip:not(.mat-basic-chip) {
+    display: inline-block !important;
+}

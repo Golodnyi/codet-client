@@ -1,0 +1,8 @@
+<div *ngIf="needPassword" class="needPassword">
+    <div *ngIf="wrongPassword">Wrong password</div>
+    <mat-form-field>
+        <input matInput type="password" placeholder="Password" [(ngModel)]="password">
+    </mat-form-field>
+    <button mat-button color="warn" (click)="setPassword()">Go</button>
+</div>
+<ace-editor *ngIf="!needPassword" [text]="code" [mode]="lang" [theme]="'pastel_on_dark'" [readOnly]="true"></ace-editor>

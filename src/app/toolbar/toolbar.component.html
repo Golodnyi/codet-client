@@ -1,0 +1,15 @@
+<mat-toolbar>
+    <mat-form-field>
+        <input matInput placeholder="Language" [matAutocomplete]="auto" [formControl]="languageControl">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let lang of langListFiltered" [value]="lang.name" (click)="setLanguage(lang)">
+                <span>{{ lang.name }}</span>
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <span class="fill-remaining-space"></span>
+    <mat-form-field>
+        <input matInput type="password" placeholder="Password (optional)" [(ngModel)]="pwd">
+    </mat-form-field>
+    <button (click)="save($event)" mat-mini-fab color="primary">Go!</button>
+</mat-toolbar>

@@ -1,0 +1,5 @@
+ace-editor {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 86px);
+}

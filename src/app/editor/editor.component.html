@@ -1,0 +1,2 @@
+<app-toolbar (langEmmiter)="changeLanguage($event)" (pwdEmmiter)="changePassword($event)" (saveEmmiter)="save($event)"></app-toolbar>
+<ace-editor [mode]="lang" [theme]="'pastel_on_dark'" [options]="options" [readOnly]="false" [(text)]="code"></ace-editor>
