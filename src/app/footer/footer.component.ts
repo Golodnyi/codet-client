@@ -15,9 +15,10 @@ export class FooterComponent {
   @Output() pwdEmmiter = new EventEmitter<any>();
   @Output() saveEmmiter = new EventEmitter<Boolean>();
   public showFiller = false;
-  public lang: any = 'Text';
+  public lang: any;
   public pwd: any = false;
   constructor(public dialog: MatDialog) {
+    this.setLanguage({name: 'C++', value: 'c_cpp'});
   }
 
   public setLanguage(lang) {
@@ -26,7 +27,6 @@ export class FooterComponent {
   }
 
   public setPassword(pwd) {
-    console.log(pwd);
     this.pwd = pwd;
     this.pwdEmmiter.emit(pwd);
   }

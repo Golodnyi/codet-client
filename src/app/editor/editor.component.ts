@@ -12,9 +12,17 @@ import { EmptyCodeComponent } from '../snack-bars/empty-code/empty-code.componen
 })
 export class EditorComponent {
   public options: any = { printMargin: false };
-  public lang: String = 'text';
+  public lang: any = 'c_cpp';
   public pwd: any;
-  public code: any;
+  public code: any = `
+  #include <iostream>
+  using namespace std;
+
+  int main()
+  {
+      cout << "Paste code!";
+      return 0;
+  }`;
 
   constructor(private router: Router, private codeService: CodeService, public snackBar: MatSnackBar) { }
 
