@@ -6,10 +6,12 @@
   </mat-list>
   <span class="fill-remaining-space"></span>
   <div class="message">
-    <mat-form-field>
-      <input matInput #message placeholder="Message" maxlength="256" [(ngModel)]="text">
-      <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
-    </mat-form-field>
-    <button mat-raised-button color="primary" (click)="send()">send</button>
+    <form (submit)="send()">
+      <mat-form-field>
+        <input matInput #message name="message" placeholder="Message" maxlength="256" [(ngModel)]="text">
+        <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
+      </mat-form-field>
+      <button mat-raised-button color="primary">send</button>
+    </form>
   </div>
 </div>
