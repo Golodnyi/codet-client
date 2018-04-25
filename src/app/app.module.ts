@@ -42,6 +42,7 @@ import { LanguageComponent } from './language/language.component';
 import { PasswordComponent } from './password/password.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ChatComponent } from './chat/chat.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 const appRoutes: Routes = [
   { path: '', component: EditorComponent },
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
     LanguageComponent,
     PasswordComponent,
     ToolbarComponent,
-    ChatComponent
+    ChatComponent,
+    SidebarComponent
   ],
   entryComponents: [EmptyCodeComponent, LanguageComponent, PasswordComponent],
   imports: [

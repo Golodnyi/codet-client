@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { Subscriber } from 'rxjs/Subscriber';
 import { map } from 'rxjs/operators/map';
 import { environment } from '../../environments/environment';
@@ -18,6 +18,8 @@ export class ChatComponent {
   private timerSubscription: Subscription;
   @ViewChild('chatLog') el: ElementRef;
   @Input() channel: any;
+  @Output() messageEmmiter = new EventEmitter<boolean>();
+  private newMessage = false;
 
   constructor() {
     this.connect();
@@ -65,6 +67,10 @@ export class ChatComponent {
           }
           break;
       }
+
+      this.newMessage = !this.newMessage;
+      this.messageEmmiter.emit(this.newMessage);
+
       setTimeout(() => {
         this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight;
       }, 200);

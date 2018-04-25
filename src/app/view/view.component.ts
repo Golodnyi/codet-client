@@ -16,6 +16,9 @@ export class ViewComponent {
   public needPassword = false;
   public wrongPassword = false;
   public password: any;
+  public show = false;
+  public newMessage = false;
+
   constructor(private router: ActivatedRoute, private codeService: CodeService, private route: Router) {
     this.router.params.subscribe(params => {
       this.channel = params['code'];
@@ -51,5 +54,13 @@ export class ViewComponent {
         }
       }
     );
+  }
+
+  public showChat(event: any) {
+    this.show = event;
+  }
+
+  public onMessage(event) {
+    this.newMessage = !this.newMessage;
   }
 }
