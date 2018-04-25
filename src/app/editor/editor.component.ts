@@ -42,7 +42,7 @@ export class EditorComponent {
 
     this.codeService.add(this.code, this.lang, this.pwd).subscribe(
       res => {
-        this.router.navigate([res.result, 'share']);
+        this.router.navigate([res.result]);
       },
       error => {
       }

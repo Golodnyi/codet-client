@@ -34,7 +34,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
-import { ShareComponent } from './share/share.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EmptyCodeComponent } from './snack-bars/empty-code/empty-code.component';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -48,7 +47,6 @@ const appRoutes: Routes = [
   { path: '', component: EditorComponent },
   { path: '404', component: NotfoundComponent },
   { path: ':code', component: ViewComponent },
-  { path: ':code/share', component: ShareComponent },
   { path: '**', component: NotfoundComponent },
 ];
 
@@ -59,7 +57,6 @@ const appRoutes: Routes = [
     FooterComponent,
     NotfoundComponent,
     ViewComponent,
-    ShareComponent,
     EmptyCodeComponent,
     LanguageComponent,
     PasswordComponent,
