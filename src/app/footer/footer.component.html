@@ -15,9 +15,9 @@
 </mat-toolbar-->
 <div>
     Language:&nbsp;&nbsp;
-    <span class="pointer" (click)="openLanguageDialog()">{{lang}}</span>
+    <span class="pointer" title="Change language" (click)="openLanguageDialog()">{{lang}}</span>
     <span class="fill-remaining-space"></span>
-    <span class="material-icons pointer" (click)="openPasswordDialog()">lock</span>
+    <span class="material-icons pointer" title="Set password" (click)="openPasswordDialog()">lock</span>
     <span class="material-icons" *ngIf="pwd">check_circle</span>
     <span class="material-icons" *ngIf="!pwd">highlight_off</span>
 </div>
