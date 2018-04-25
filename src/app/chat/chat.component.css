@@ -1,0 +1,40 @@
+.chat {
+    width: 400px;
+    height: 100%;
+    position: absolute;
+    color: #8F938F;
+    background-color: #353030;
+    right: 0;
+}
+
+.messages {
+    height: calc(100% - 130px);
+    width: 400px;
+    overflow: auto;
+    position: absolute;
+    direction:rtl;
+    top: 0;
+}
+
+.msg {
+    width: 100%;
+    border-bottom: #8F938F 5px solid;
+    word-wrap: break-word;
+    word-break: break-all;
+    direction:ltr;
+}
+
+.message {
+    height: 120px;
+    width: 400px;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    line-height: 120px;
+    border-top: #7b1fa2 5px solid;
+}
+
+.name {
+    color: #7b1fa2;
+    font-weight: bold;
+}

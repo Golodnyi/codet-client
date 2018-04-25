@@ -10,7 +10,7 @@ import { CodeService } from '../services/code.service';
   providers: [CodeService]
 })
 export class ViewComponent {
-  private params: any;
+  public channel: any;
   public code: any;
   public lang: String;
   public needPassword = false;
@@ -18,7 +18,7 @@ export class ViewComponent {
   public password: any;
   constructor(private router: ActivatedRoute, private codeService: CodeService, private route: Router) {
     this.router.params.subscribe(params => {
-      this.params = params;
+      this.channel = params['code'];
 
       this.codeService.get(params['code']).subscribe(
         res => {
@@ -37,7 +37,7 @@ export class ViewComponent {
   }
 
   public setPassword() {
-    this.codeService.get(this.params['code'], this.password).subscribe(
+    this.codeService.get(this.channel, this.password).subscribe(
       res => {
         this.code = res.result.code;
         this.lang = res.result.lang;

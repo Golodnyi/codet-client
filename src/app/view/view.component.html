@@ -6,3 +6,4 @@
     <button mat-button color="warn" (click)="setPassword()">Go</button>
 </div>
 <ace-editor *ngIf="!needPassword" [text]="code" [mode]="lang" [theme]="'pastel_on_dark'" [readOnly]="true"></ace-editor>
+<app-chat [channel]="channel" *ngIf="!needPassword"></app-chat>

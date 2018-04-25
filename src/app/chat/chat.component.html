@@ -1,0 +1,15 @@
+<div class="chat">
+  <mat-list role="list" class="messages">
+    <mat-list-item role="listitem" class="msg" *ngFor="let message of messages">
+      <span class="name">{{message.name}}</span>: {{message.message}}
+    </mat-list-item>
+  </mat-list>
+  <span class="fill-remaining-space"></span>
+  <div class="message">
+    <mat-form-field>
+      <input matInput #message placeholder="Message" [(ngModel)]="text">
+      <mat-hint align="end">{{message.value.length}} / 256 {{text}}</mat-hint>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="send()">send</button>
+  </div>
+</div>

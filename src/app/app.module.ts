@@ -41,6 +41,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { LanguageComponent } from './language/language.component';
 import { PasswordComponent } from './password/password.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { ChatComponent } from './chat/chat.component';
 
 const appRoutes: Routes = [
   { path: '', component: EditorComponent },
@@ -61,7 +62,8 @@ const appRoutes: Routes = [
     EmptyCodeComponent,
     LanguageComponent,
     PasswordComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    ChatComponent
   ],
   entryComponents: [EmptyCodeComponent, LanguageComponent, PasswordComponent],
   imports: [
