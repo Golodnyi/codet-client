@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs/Subscription';
 export class ChatComponent {
   public messages = [];
   private ws: any;
-  public text: any;
+  public text = '';
   private timer = TimerObservable.create(5000, 1000);
   private timerSubscription: Subscription;
   @Input() channel: any;
@@ -24,6 +24,10 @@ export class ChatComponent {
   }
 
   public send() {
+    if (!this.text.length) {
+      return false;
+    }
+
     const message = {
       type: 0,
       message: this.text,
