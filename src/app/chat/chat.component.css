@@ -8,6 +8,7 @@
 }
 
 .messages {
+    background-color: #353030;    
     height: calc(100% - 130px);
     width: 400px;
     overflow: auto;
@@ -17,8 +18,8 @@
 }
 
 .msg {
+    margin-bottom: 10px;
     width: 100%;
-    border-bottom: #8F938F 2px solid;
     word-wrap: break-word;
     word-break: break-all;
     direction:ltr;
@@ -40,6 +41,7 @@
     align-self: flex-start;
 }
 
-.mat-list .mat-list-item {
+mat-list mat-list-item {
     height: auto;
+    display: contents;
 }

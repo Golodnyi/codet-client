@@ -1,9 +1,11 @@
 <div class="chat">
-  <mat-list role="list" class="messages">
-    <mat-list-item role="listitem" class="msg" *ngFor="let message of messages">
-      <span class="name">{{message.name}}</span>: {{message.message}}
-    </mat-list-item>
-  </mat-list>
+  <div #chatLog class="messages">
+    <mat-list role="list">
+      <mat-list-item role="listitem" class="msg" *ngFor="let message of messages">
+        <span class="name">{{message.name}}</span>: {{message.message}}
+      </mat-list-item>
+    </mat-list>
+  </div>
   <span class="fill-remaining-space"></span>
   <div class="message">
     <form (submit)="send()">

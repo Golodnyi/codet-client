@@ -1,11 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { Subscriber } from 'rxjs/Subscriber';
 import { map } from 'rxjs/operators/map';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
 import { Subscription } from 'rxjs/Subscription';
-
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -17,6 +16,7 @@ export class ChatComponent {
   public text = '';
   private timer = TimerObservable.create(5000, 1000);
   private timerSubscription: Subscription;
+  @ViewChild('chatLog') el: ElementRef;
   @Input() channel: any;
 
   constructor() {
@@ -65,6 +65,9 @@ export class ChatComponent {
           }
           break;
       }
+      setTimeout(() => {
+        this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight;
+      }, 200);
     };
 
     this.ws.onclose = msg => {
