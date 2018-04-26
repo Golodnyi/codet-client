@@ -18,6 +18,7 @@ export class ViewComponent {
   public password: any;
   public show = false;
   public newMessage = false;
+  public chat = [];
 
   constructor(private router: ActivatedRoute, private codeService: CodeService, private route: Router) {
     this.router.params.subscribe(params => {
@@ -27,6 +28,9 @@ export class ViewComponent {
         res => {
           this.code = res.result.code;
           this.lang = res.result.lang;
+          if (res.result.chat !== undefined) {
+            this.chat = res.result.chat;
+          }
         },
         error => {
           if (error.status === 401) {

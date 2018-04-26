@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, ViewChild, AfterViewInit, EventEmitter, Output } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild, AfterViewInit, EventEmitter, Output, OnInit } from '@angular/core';
 import { Subscriber } from 'rxjs/Subscriber';
 import { map } from 'rxjs/operators/map';
 import { environment } from '../../environments/environment';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
 })
-export class ChatComponent {
+export class ChatComponent implements OnInit {
   public messages = [];
   private ws: any;
   public text = '';
@@ -18,8 +18,15 @@ export class ChatComponent {
   private timerSubscription: Subscription;
   @ViewChild('chatLog') el: ElementRef;
   @Input() channel: any;
+  @Input() chat = [];
   @Output() messageEmmiter = new EventEmitter<boolean>();
   private newMessage = false;
+
+  ngOnInit() {
+    if (this.chat.length) {
+      this.messages = this.chat;
+    }
+  }
 
   constructor() {
     this.connect();
