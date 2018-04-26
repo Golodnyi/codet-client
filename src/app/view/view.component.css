@@ -1,6 +1,6 @@
 ace-editor {
     position: absolute;
-    width: 100%;
+    width: calc(100% - 32px);
     height: 100%;
 }
 

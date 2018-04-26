@@ -1,12 +1,12 @@
 div {
     background-color: #353030;
     height: calc(100% - 10px);
-    width: 48px;
+    width: 32px;
     position: absolute;
     right: 0;
     color: #8F938F;
+    text-align: center;
     padding-top: 10px;
-    padding-left: 10px;
 }
 
 .pointer {
