@@ -7,4 +7,4 @@
 </div>
 <ace-editor *ngIf="!needPassword" [text]="code" [mode]="lang" [theme]="'pastel_on_dark'" [readOnly]="true"></ace-editor>
 <app-chat (messageEmmiter)="onMessage($event)" [hidden]="!show" [channel]="channel" *ngIf="!needPassword"></app-chat>
-<app-sidebar *ngIf="!needPassword" [new]="newMessage" (chatEmmiter)="showChat($event)"></app-sidebar>
+<app-sidebar *ngIf="!needPassword" [new]="newMessage" [channel]="channel" (chatEmmiter)="showChat($event)"></app-sidebar>

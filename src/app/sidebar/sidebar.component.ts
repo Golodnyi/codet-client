@@ -1,4 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Input, OnChanges } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { UrlComponent } from '../url/url.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,9 +11,10 @@ import { Component, OnInit, EventEmitter, Output, Input, OnChanges } from '@angu
 export class SidebarComponent implements OnChanges {
   @Output() chatEmmiter = new EventEmitter<boolean>();
   @Input() new;
+  @Input() channel;
   private open = false;
 
-  constructor() { }
+  constructor(private dialog: MatDialog, private router: Router) { }
 
   ngOnChanges(changes) {
     if (!this.open) {
@@ -26,4 +30,16 @@ export class SidebarComponent implements OnChanges {
     this.chatEmmiter.emit(this.open);
   }
 
+  public openUrlDialog(): void {
+    const dialogRef = this.dialog.open(UrlComponent, {
+      width: '360px',
+      data: {
+        url: document.location.protocol + '//' + document.location.hostname + '/' + this.channel
+      }
+    });
+  }
+
+  public home() {
+    this.router.navigate(['/']);
+  }
 }

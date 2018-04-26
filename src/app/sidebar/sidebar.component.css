@@ -9,6 +9,10 @@ div {
     padding-top: 10px;
 }
 
+div span {
+    padding-bottom: 10px;
+}
+
 .pointer {
     cursor: pointer;
     color: #fff;
