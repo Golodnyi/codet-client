@@ -12,7 +12,7 @@ export class PasswordComponent {
   constructor(public dialogRef: MatDialogRef<PasswordComponent>) {
   }
 
-  public onClose(): void {
+  public onSubmit(): void {
     this.dialogRef.close(this.pwd);
   }
 

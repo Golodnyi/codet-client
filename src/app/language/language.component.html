@@ -1,12 +1,12 @@
-<div>
+<form (submit)="onSubmit()">
     <mat-form-field>
         <input matInput placeholder="Language" [matAutocomplete]="auto" [formControl]="languageControl">
-        <mat-autocomplete #auto="matAutocomplete">
+        <mat-autocomplete name="language" #auto="matAutocomplete">
             <mat-option *ngFor="let lang of langListFiltered" [value]="lang.name" (click)="setLanguage(lang)">
                 <span>{{ lang.name }}</span>
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="onClose()">Save</button>
-    <button mat-raised-button (click)="onCancel()">Cancel</button>
-</div>
+</form>
+<button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+<button mat-raised-button (click)="onCancel()">Cancel</button>

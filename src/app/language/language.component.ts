@@ -46,7 +46,7 @@ export class LanguageComponent implements OnInit {
     this.lang = lang;
   }
 
-  public onClose(): void {
+  public onSubmit(): void {
     this.dialogRef.close(this.lang);
   }
 
