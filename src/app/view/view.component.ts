@@ -21,22 +21,26 @@ export class ViewComponent {
   public newMessage = false;
   public chat = [];
 
+  private initData(data: any) {
+    this.code = data.result.code;
+    this.lang = data.result.lang;
+
+    if (data.result.comment !== undefined) {
+      this.comment = data.result.comment;
+    }
+
+    if (data.result.chat !== undefined) {
+      this.chat = data.result.chat;
+    }
+  }
+
   constructor(private router: ActivatedRoute, private codeService: CodeService, private route: Router) {
     this.router.params.subscribe(params => {
       this.channel = params['code'];
 
       this.codeService.get(params['code']).subscribe(
         res => {
-          this.code = res.result.code;
-          this.lang = res.result.lang;
-
-          if (res.result.comment !== undefined) {
-            this.comment = res.result.comment;
-          }
-
-          if (res.result.chat !== undefined) {
-            this.chat = res.result.chat;
-          }
+          this.initData(res);
         },
         error => {
           if (error.status === 401) {
@@ -52,8 +56,7 @@ export class ViewComponent {
   public setPassword() {
     this.codeService.get(this.channel, this.password).subscribe(
       res => {
-        this.code = res.result.code;
-        this.lang = res.result.lang;
+        this.initData(res);
 
         this.needPassword = false;
         this.wrongPassword = false;
