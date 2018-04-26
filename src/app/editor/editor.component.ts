@@ -14,6 +14,7 @@ export class EditorComponent {
   public options: any = { printMargin: false };
   public lang: any = 'c_cpp';
   public pwd: any;
+  public comment: any;
   public code: any = `
   #include <iostream>
   using namespace std;
@@ -34,13 +35,17 @@ export class EditorComponent {
     this.pwd = pwd;
   }
 
+  public changeComment(comment: any) {
+    this.comment = comment;
+  }
+
   public save(event: any) {
     if (this.code === undefined) {
       this.openSnackBar();
       return false;
     }
 
-    this.codeService.add(this.code, this.lang, this.pwd).subscribe(
+    this.codeService.add(this.code, this.lang, this.pwd, this.comment).subscribe(
       res => {
         this.router.navigate([res.result]);
       },

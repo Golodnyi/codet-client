@@ -30,3 +30,7 @@ div a, div a:visited {
     cursor: pointer;
     color: #fff;
 }
+
+span {
+    margin-right: 10px;
+}

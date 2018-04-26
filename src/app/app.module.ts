@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatListModule } from '@angular/material/list';
 import { MatInputModule } from '@angular/material';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 import 'brace';
 import 'brace/theme/pastel_on_dark';
@@ -37,12 +38,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { EmptyCodeComponent } from './snack-bars/empty-code/empty-code.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { LanguageComponent } from './language/language.component';
-import { PasswordComponent } from './password/password.component';
+import { LanguageComponent } from './modals/language/language.component';
+import { PasswordComponent } from './modals/password/password.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { ChatComponent } from './chat/chat.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { UrlComponent } from './url/url.component';
+import { UrlComponent } from './modals/url/url.component';
+import { CommentComponent } from './comment/comment.component';
+import { CommentComponent as CommentModalComponent} from './modals/comment/comment.component';
 
 const appRoutes: Routes = [
   { path: '', component: EditorComponent },
@@ -64,9 +67,11 @@ const appRoutes: Routes = [
     ToolbarComponent,
     ChatComponent,
     SidebarComponent,
-    UrlComponent
+    UrlComponent,
+    CommentComponent,
+    CommentModalComponent
   ],
-  entryComponents: [EmptyCodeComponent, LanguageComponent, PasswordComponent, UrlComponent],
+  entryComponents: [EmptyCodeComponent, LanguageComponent, PasswordComponent, UrlComponent, CommentModalComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -86,7 +91,8 @@ const appRoutes: Routes = [
     MatListModule,
     MatInputModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule
   ],
   providers: [HttpClient],
   bootstrap: [AppComponent]

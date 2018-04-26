@@ -2,7 +2,8 @@
     Language:&nbsp;&nbsp;
     <span class="pointer" title="Change language" (click)="openLanguageDialog()">{{lang}}</span>
     <span class="fill-remaining-space"></span>
-    <span class="material-icons pointer" title="Set password" (click)="openPasswordDialog()">lock</span>
-    <span class="material-icons" *ngIf="pwd">check_circle</span>
-    <span class="material-icons" *ngIf="!pwd">highlight_off</span>
+    <span class="material-icons pointer" (click)="openCommentDialog()" title="Add comment">comment</span>
+    &nbsp;&nbsp;&nbsp;
+    <span class="material-icons pointer" *ngIf="!pwd" title="Set password" (click)="openPasswordDialog()">lock_open</span>
+    <span class="material-icons pointer" *ngIf="pwd" title="Set password" (click)="openPasswordDialog()">lock</span>
 </div>

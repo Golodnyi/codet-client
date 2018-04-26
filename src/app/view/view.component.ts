@@ -11,6 +11,7 @@ import { CodeService } from '../services/code.service';
 })
 export class ViewComponent {
   public channel: any;
+  public comment: any = false;
   public code: any;
   public lang: String;
   public needPassword = false;
@@ -28,6 +29,11 @@ export class ViewComponent {
         res => {
           this.code = res.result.code;
           this.lang = res.result.lang;
+
+          if (res.result.comment !== undefined) {
+            this.comment = res.result.comment;
+          }
+
           if (res.result.chat !== undefined) {
             this.chat = res.result.chat;
           }

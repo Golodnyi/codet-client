@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input, OnChanges } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { UrlComponent } from '../url/url.component';
+import { UrlComponent } from '../modals/url/url.component';
 import { Router } from '@angular/router';
 
 @Component({

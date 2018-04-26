@@ -21,10 +21,14 @@ export class CodeService {
     return this.http.get(this._env + '/v1/get', { params: params });
   }
 
-  public add(code: any, lang: any = 'text', pwd: any = false): Observable<any> {
-    const body = {code: false, lang: false, pwd: false};
+  public add(code: any, lang: any = 'text', pwd: any = false, comment: false): Observable<any> {
+    const body = {code: false, lang: false, pwd: false, comment: false};
     body.code = code;
     body.lang = lang;
+
+    if (comment) {
+      body.comment = comment;
+    }
 
     if (pwd) {
       body.pwd = pwd;

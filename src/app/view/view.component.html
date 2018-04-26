@@ -5,6 +5,10 @@
     </mat-form-field>
     <button mat-button color="warn" (click)="setPassword()">Go</button>
 </div>
-<ace-editor *ngIf="!needPassword" [text]="code" [mode]="lang" [theme]="'pastel_on_dark'" [readOnly]="true"></ace-editor>
-<app-chat (messageEmmiter)="onMessage($event)" [chat]="chat" [hidden]="!show" [channel]="channel" *ngIf="!needPassword && code"></app-chat>
-<app-sidebar *ngIf="!needPassword" [new]="newMessage" [channel]="channel" (chatEmmiter)="showChat($event)"></app-sidebar>
+
+<div *ngIf="!needPassword && code">
+    <app-comment [comment]="comment"></app-comment>
+    <ace-editor [text]="code" [mode]="lang" [theme]="'pastel_on_dark'" [readOnly]="true"></ace-editor>
+    <app-chat (messageEmmiter)="onMessage($event)" [chat]="chat" [hidden]="!show" [channel]="channel"></app-chat>
+    <app-sidebar [new]="newMessage" [channel]="channel" (chatEmmiter)="showChat($event)"></app-sidebar>
+</div>
