@@ -1,9 +1,11 @@
 <div *ngIf="needPassword" class="needPassword">
     <div *ngIf="wrongPassword">Wrong password</div>
-    <mat-form-field>
-        <input matInput type="password" placeholder="Password" [(ngModel)]="password">
-    </mat-form-field>
-    <button mat-button color="warn" (click)="setPassword()">Go</button>
+    <form (submit)="setPassword()">
+        <mat-form-field>
+            <input matInput name="password" type="password" placeholder="Password" [(ngModel)]="password">
+        </mat-form-field>
+        <button mat-button color="warn">Go</button>
+    </form>
 </div>
 
 <div *ngIf="!needPassword && code">
