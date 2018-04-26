@@ -5,6 +5,7 @@
     color: #8F938F;
     background-color: #353030;
     right: 32px;
+    z-index: 4;
 }
 
 .messages {
