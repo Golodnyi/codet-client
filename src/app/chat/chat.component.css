@@ -1,11 +1,12 @@
 .chat {
     width: 400px;
-    height: 100%;
+    height: calc(100% - 48px);
     position: absolute;
     color: #8F938F;
     background-color: #353030;
     right: 32px;
-    z-index: 4;
+    z-index: 6;
+    top: 48px
 }
 
 .messages {
