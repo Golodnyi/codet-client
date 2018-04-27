@@ -49,12 +49,10 @@ export class ViewComponent implements OnDestroy {
 
     setTimeout(() => {
       this.editor.getEditor().session.on('changeScrollTop', (e) => {
-        console.log('scroll top', e);
         this.scrollY = e;
         this.redrawMarkers();
       });
       this.editor.getEditor().session.on('changeScrollLeft', (e) => {
-        console.log('scroll left', e);
         this.scrollX = e;
         this.redrawMarkers();
       });
