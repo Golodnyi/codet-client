@@ -28,6 +28,8 @@ export class ViewComponent implements OnDestroy {
   public chat = [];
   public markers = [];
   private subscription: Subscription = new Subscription();
+  private scrollX = 0;
+  private scrollY = 0;
 
   @ViewChild('editor') editor: any;
 
@@ -45,21 +47,33 @@ export class ViewComponent implements OnDestroy {
 
     this.changeDetectorRef.markForCheck();
 
-    if (data.result.markers && data.result.markers.length) {
-      setTimeout(() => {
-        this.editor.getEditor().session.on('changeScrollTop', () => {
-          console.log('scroll top');
-          this.redrawMarkers();
-        });
-        this.editor.getEditor().session.on('changeScrollLeft', () => {
-          console.log('scroll left');
-          this.redrawMarkers();
-        });
+    setTimeout(() => {
+      this.editor.getEditor().session.on('changeScrollTop', (e) => {
+        console.log('scroll top', e);
+        this.scrollY = e;
+        this.redrawMarkers();
+      });
+      this.editor.getEditor().session.on('changeScrollLeft', (e) => {
+        console.log('scroll left', e);
+        this.scrollX = e;
+        this.redrawMarkers();
+      });
+
+      if (data.result.markers !== undefined) {
         data.result.markers.forEach(marker => {
           this.addMarker(marker.lineNumber, marker.column, marker.name, marker.message);
         });
-      }, 1000);
-    }
+      }
+    }, 1000);
+  }
+
+  public hiddenMarker(x: number, y: number, marker: any) {
+    const width =  this.editor.getEditor().renderer.$size.width;
+    const height =  this.editor.getEditor().renderer.$size.height;
+    const widthVisible = x - width <= 0;
+    const heightVisible = y - height <= 0;
+
+    return !(widthVisible && heightVisible);
   }
 
   constructor(

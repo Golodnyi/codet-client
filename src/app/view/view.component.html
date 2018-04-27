@@ -9,7 +9,7 @@
 </div>
 
 <div [hidden]="needPassword || !code">
-    <div *ngFor="let marker of markers" class="marker" [style.left.px]="marker.x" [style.top.px]="marker.y">
+    <div *ngFor="let marker of markers" class="marker" [hidden]="hiddenMarker(marker.x, marker.y, marker)" [style.left.px]="marker.x" [style.top.px]="marker.y">
         <i class="material-icons flag">bookmark</i>
         <i class="text"><span class="name">{{marker.name}}</span>: {{marker.message}}</i>
     </div>
