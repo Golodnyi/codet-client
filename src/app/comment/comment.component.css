@@ -2,5 +2,5 @@ mat-expansion-panel {
     top: 0;
     width: 100%;
     position: absolute;
-    z-index: 5;
+    z-index: 6;
 }
