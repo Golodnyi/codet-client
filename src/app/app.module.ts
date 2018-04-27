@@ -46,9 +46,10 @@ import { ChatComponent } from './chat/chat.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { UrlComponent } from './modals/url/url.component';
 import { CommentComponent } from './comment/comment.component';
-import { CommentComponent as CommentModalComponent} from './modals/comment/comment.component';
+import { CommentComponent as CommentModalComponent } from './modals/comment/comment.component';
 import { MarkerComponent } from './modals/marker/marker.component';
 import { WebsocketService } from './services/websocket.service';
+import { MarkerExistComponent } from './modals/marker-exist/marker-exist.component';
 
 const appRoutes: Routes = [
   { path: '', component: EditorComponent },
@@ -73,9 +74,18 @@ const appRoutes: Routes = [
     UrlComponent,
     CommentComponent,
     CommentModalComponent,
-    MarkerComponent
+    MarkerComponent,
+    MarkerExistComponent
   ],
-  entryComponents: [EmptyCodeComponent, LanguageComponent, PasswordComponent, UrlComponent, CommentModalComponent, MarkerComponent],
+  entryComponents: [
+    EmptyCodeComponent,
+    LanguageComponent,
+    PasswordComponent,
+    UrlComponent,
+    CommentModalComponent,
+    MarkerComponent,
+    MarkerExistComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,

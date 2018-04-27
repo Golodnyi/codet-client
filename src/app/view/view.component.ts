@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { MarkerComponent } from '../modals/marker/marker.component';
 import { WebsocketService } from '../services/websocket.service';
 import { Subscription } from 'rxjs/Subscription';
+import { MarkerExistComponent } from '../modals/marker-exist/marker-exist.component';
 
 @Component({
   selector: 'app-view',
@@ -161,12 +162,39 @@ export class ViewComponent implements OnDestroy {
     this.newMessage = !this.newMessage;
   }
 
+  private searchMarkerByLine(lineNumber: number): boolean {
+    return this.markers.find(marker => marker.lineNumber === lineNumber);
+  }
+
+  private deleteMarkerByLine(lineNumber: number) {
+    const obj = this.searchMarkerByLine(lineNumber);
+    this.markers = this.markers.filter(marker => {
+      return marker !== obj;
+    });
+  }
+
   public openMarkerDialog(): void {
     const row = this.editor.getEditor().selection.getCursor().row;
     const column = this.editor.getEditor().selection.getCursor().column;
     const code = this.editor.getEditor().session.doc.$lines[row];
     const coord = this.editor.getEditor().renderer.textToScreenCoordinates(row, column);
 
+    if (this.searchMarkerByLine(row) !== undefined) {
+      const dialogExistRef = this.dialog.open(MarkerExistComponent, {
+        width: '360px',
+      });
+
+      dialogExistRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.markerDialog(row, column, code, true);
+        }
+      });
+    } else {
+      this.markerDialog(row, column, code, false);
+    }
+  }
+
+  private markerDialog(row, column, code, replace) {
     const dialogRef = this.dialog.open(MarkerComponent, {
       width: '360px',
       data: {
@@ -178,6 +206,10 @@ export class ViewComponent implements OnDestroy {
     dialogRef.afterClosed().subscribe(msgMarker => {
       if (msgMarker) {
         this.webSocketService.setMarker(this.channel, row, column, msgMarker);
+
+        if (replace) {
+          this.deleteMarkerByLine(row);
+        }
       }
     });
   }
