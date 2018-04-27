@@ -1,40 +1,39 @@
 .chat {
     width: 400px;
+    max-width: 100%;
     height: calc(100% - 48px);
     position: absolute;
     color: #8F938F;
-    background-color: #353030;
-    right: 32px;
     z-index: 6;
-    top: 48px
+    right: 32px;
+    top: 48px;
 }
 
 .messages {
-    background-color: #353030;    
+    background-color: #353030;
     height: calc(100% - 130px);
-    width: 400px;
     overflow: auto;
-    position: absolute;
+    background-color: #353030;
     direction:rtl;
-    top: 0;
+    margin-left: 32px;
 }
 
 .msg {
     margin-bottom: 10px;
     width: 100%;
+    max-width: 100%;
     word-wrap: break-word;
     word-break: break-all;
     direction:ltr;
 }
 
 .message {
+    background-color: #353030;
     height: 120px;
-    width: 400px;
-    position: absolute;
-    bottom: 0;
     text-align: center;
     line-height: 120px;
     border-top: #7b1fa2 5px solid;
+    margin-left: 32px;
 }
 
 .name {

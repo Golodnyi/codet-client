@@ -8,6 +8,7 @@ div {
     text-align: center;
     padding-top: 10px;
     top: 48px;
+    z-index: 5;
 }
 
 div span {
