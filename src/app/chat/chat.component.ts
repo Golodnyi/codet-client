@@ -1,26 +1,24 @@
-import { Component, Input, ElementRef, ViewChild, AfterViewInit, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, Input, ElementRef, ViewChild, AfterViewInit, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
 import { Subscriber } from 'rxjs/Subscriber';
 import { map } from 'rxjs/operators/map';
-import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { TimerObservable } from 'rxjs/observable/TimerObservable';
 import { Subscription } from 'rxjs/Subscription';
+import { WebsocketService } from '../services/websocket.service';
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css'],
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
   public messages = [];
-  private ws: any;
   public text = '';
-  private timer = TimerObservable.create(5000, 1000);
-  private timerSubscription: Subscription;
   @ViewChild('chatLog') el: ElementRef;
   @Input() channel: any;
   @Input() chat = [];
   @Output() messageEmmiter = new EventEmitter<boolean>();
   private newMessage = false;
+  private subscription: Subscription = new Subscription();
 
   ngOnInit() {
     if (this.chat.length) {
@@ -28,66 +26,63 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  constructor() {
-    this.connect();
+  constructor(private webSocketService: WebsocketService) {
+    this.subscription.add(
+      this.webSocketService.open().subscribe(open => {
+        if (!open) {
+          return false;
+        }
+        console.log('chat', 'onOpen');
+      })
+    );
+
+    this.subscription.add(
+      this.webSocketService.close().subscribe(close => {
+        if (!close) {
+          return false;
+        }
+        console.log('chat', 'onClose');
+        this.messages.push({ name: 'System', message: 'You are disconect' });
+      })
+    );
+
+    this.subscription.add(
+      this.webSocketService.message().subscribe(msg => {
+        if (!msg) {
+          return false;
+        }
+        console.log('chat', 'onMessage');
+        const data = JSON.parse(msg.data);
+
+        switch (data.type) {
+          case 0:
+            this.messages.push(data);
+            break;
+          case 1:
+            if (data.result === 'ok') {
+              this.messages.push({ name: 'System', message: 'You are connected' });
+            } else {
+              this.messages.push({ name: 'System', message: 'Error to join channel' });
+            }
+            break;
+        }
+
+        this.newMessage = !this.newMessage;
+        this.messageEmmiter.emit(this.newMessage);
+
+        setTimeout(() => {
+          this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight;
+        }, 200);
+      })
+    );
   }
 
   public send() {
-    if (!this.text.length) {
-      return false;
-    }
-
-    const message = {
-      type: 0,
-      message: this.text,
-      channel: this.channel
-    };
-
-    this.ws.send(JSON.stringify(message));
+    this.webSocketService.send(this.channel, 0, this.text);
     this.text = '';
   }
 
-  private connect() {
-    if (this.timerSubscription) {
-      this.timerSubscription.unsubscribe();
-    }
-
-    this.ws = new WebSocket(environment.websocket);
-
-    this.ws.onopen = msg => {
-      // TODO: проверить что присутствуют все переменные
-      this.ws.send(JSON.stringify({ type: 1, channel: this.channel }));
-    };
-
-    this.ws.onmessage = msg => {
-      const data = JSON.parse(msg.data);
-
-      switch (data.type) {
-        case 0:
-          this.messages.push(data);
-          break;
-        case 1:
-          if (data.result === 'ok') {
-            this.messages.push({ name: 'System', message: 'You are connected' });
-          } else {
-            this.messages.push({ name: 'System', message: 'Error to join channel' });
-          }
-          break;
-      }
-
-      this.newMessage = !this.newMessage;
-      this.messageEmmiter.emit(this.newMessage);
-
-      setTimeout(() => {
-        this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight;
-      }, 200);
-    };
-
-    this.ws.onclose = msg => {
-      this.messages.push({ name: 'System', message: 'You are disconected' });
-      this.timerSubscription = this.timer.subscribe(() => {
-        this.connect();
-      });
-    };
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

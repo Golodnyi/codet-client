@@ -9,7 +9,6 @@ export class CommentComponent implements OnInit {
   @Input() comment: any;
 
   constructor() {
-    console.log(this.comment);
   }
 
   ngOnInit() {

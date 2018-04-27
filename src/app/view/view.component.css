@@ -17,3 +17,29 @@ div.needPassword {
 div.needPassword h1 {
     color: #7b1fa2;
 }
+
+.marker {
+    position: absolute;
+    color: rgb(224, 215, 215);
+    z-index: 3;
+}
+
+.marker .text {
+    font-size: 12px;
+    position: relative;
+    top: 6px;
+}
+
+.marker .material-icons.flag {
+    font-size: 16px;
+    color: #7b1fa2;
+    position: relative;
+    top: 10px;
+}
+
+.marker .material-icons.trash {
+    font-size: 16px;
+    position: relative;
+    top: 10px;
+    cursor: pointer;
+}

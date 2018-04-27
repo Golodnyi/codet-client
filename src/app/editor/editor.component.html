@@ -1,3 +1,3 @@
 <app-toolbar (saveEmmiter)="save($event)"></app-toolbar>
-<ace-editor [mode]="lang" [theme]="'pastel_on_dark'" [options]="options" [readOnly]="false" [(text)]="code"></ace-editor>
+<ace-editor *ngIf="lang" [mode]="lang" [theme]="'pastel_on_dark'" [options]="options" [readOnly]="false" [(text)]="code"></ace-editor>
 <app-footer (langEmmiter)="changeLanguage($event)" (commentEmmiter)="changeComment($event)" (pwdEmmiter)="changePassword($event)"></app-footer>

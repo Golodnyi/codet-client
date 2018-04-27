@@ -31,6 +31,7 @@ import 'brace/mode/typescript';
 import 'brace/mode/python';
 import 'brace/mode/html';
 import 'brace/mode/css';
+
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -46,6 +47,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { UrlComponent } from './modals/url/url.component';
 import { CommentComponent } from './comment/comment.component';
 import { CommentComponent as CommentModalComponent} from './modals/comment/comment.component';
+import { MarkerComponent } from './modals/marker/marker.component';
+import { WebsocketService } from './services/websocket.service';
 
 const appRoutes: Routes = [
   { path: '', component: EditorComponent },
@@ -69,9 +72,10 @@ const appRoutes: Routes = [
     SidebarComponent,
     UrlComponent,
     CommentComponent,
-    CommentModalComponent
+    CommentModalComponent,
+    MarkerComponent
   ],
-  entryComponents: [EmptyCodeComponent, LanguageComponent, PasswordComponent, UrlComponent, CommentModalComponent],
+  entryComponents: [EmptyCodeComponent, LanguageComponent, PasswordComponent, UrlComponent, CommentModalComponent, MarkerComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -94,7 +98,7 @@ const appRoutes: Routes = [
     MatDialogModule,
     MatExpansionModule
   ],
-  providers: [HttpClient],
+  providers: [HttpClient, WebsocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

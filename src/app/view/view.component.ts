@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from 'selenium-webdriver/http';
 import { CodeService } from '../services/code.service';
+import { MatDialog } from '@angular/material';
+import { MarkerComponent } from '../modals/marker/marker.component';
+import { WebsocketService } from '../services/websocket.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-view',
@@ -9,7 +13,7 @@ import { CodeService } from '../services/code.service';
   styleUrls: ['./view.component.css'],
   providers: [CodeService]
 })
-export class ViewComponent {
+export class ViewComponent implements OnDestroy {
   public channel: any;
   public comment: any = false;
   public code: any;
@@ -20,6 +24,10 @@ export class ViewComponent {
   public show = false;
   public newMessage = false;
   public chat = [];
+  public markers = [];
+  private subscription: Subscription = new Subscription();
+
+  @ViewChild('editor') editor: any;
 
   private initData(data: any) {
     this.code = data.result.code;
@@ -32,11 +40,53 @@ export class ViewComponent {
     if (data.result.chat !== undefined) {
       this.chat = data.result.chat;
     }
+
+    if (data.result.markers && data.result.markers.length) {
+      setTimeout(() => {
+        data.result.markers.forEach(marker => {
+          this.addMarker(marker.lineNumber, marker.column, marker.name, marker.message);
+        });
+      }, 200);
+    }
   }
 
-  constructor(private router: ActivatedRoute, private codeService: CodeService, private route: Router) {
+  constructor(
+    private dialog: MatDialog,
+    private router: ActivatedRoute,
+    private codeService: CodeService,
+    private route: Router,
+    private webSocketService: WebsocketService) {
     this.router.params.subscribe(params => {
       this.channel = params['code'];
+
+      this.webSocketService.connect();
+
+      this.subscription.add(
+        this.webSocketService.open().subscribe(open => {
+          if (!open) {
+            return false;
+          }
+          console.log('view', 'send join request');
+          this.webSocketService.send(this.channel, 1, JSON.stringify({ type: 1, channel: this.channel }));
+        })
+      );
+
+      this.subscription.add(
+        this.webSocketService.message().subscribe(msg => {
+          if (!msg) {
+            return false;
+          }
+          console.log('view', 'onMessage');
+
+          const data = JSON.parse(msg.data);
+
+          switch (data.type) {
+            case 2:
+              this.addMarker(data.lineNumber, data.column, data.name, data.message);
+              break;
+          }
+        })
+      );
 
       this.codeService.get(params['code']).subscribe(
         res => {
@@ -51,6 +101,15 @@ export class ViewComponent {
         }
       );
     });
+  }
+
+  private addMarker(lineNumber, column, name, message) {
+    if (this.editor === undefined) {
+      return false;
+    }
+
+    const coord = this.editor.getEditor().renderer.textToScreenCoordinates(lineNumber, column);
+    this.markers.push({ x: coord.pageX + 5, y: coord.pageY - 12, name: name, message: message });
   }
 
   public setPassword() {
@@ -75,5 +134,30 @@ export class ViewComponent {
 
   public onMessage(event) {
     this.newMessage = !this.newMessage;
+  }
+
+  public openMarkerDialog(): void {
+    const row = this.editor.getEditor().selection.getCursor().row;
+    const column = this.editor.getEditor().selection.getCursor().column;
+    const code = this.editor.getEditor().session.doc.$lines[row];
+    const coord = this.editor.getEditor().renderer.textToScreenCoordinates(row, column);
+
+    const dialogRef = this.dialog.open(MarkerComponent, {
+      width: '360px',
+      data: {
+        lineNumber: row + 1,
+        code: code.replace(/^\s*(.*)\s*$/, '$1')
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(msgMarker => {
+      if (msgMarker) {
+        this.webSocketService.setMarker(this.channel, row, column, msgMarker);
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

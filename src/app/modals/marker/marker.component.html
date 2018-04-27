@@ -1,0 +1,10 @@
+Add marker to line {{data.lineNumber}} <pre>{{data.code}}</pre>
+<form (submit)="onSubmit()">
+    <mat-form-field class="full-width">
+        <textarea matInput name="message" placeholder="Message" matTextareaAutosize matAutosizeMinRows="5"
+                matAutosizeMaxRows="10" maxlength="200" #messageMarker [(ngModel)]="message"></textarea>
+                <mat-hint align="end">{{messageMarker.value.length}} / 200</mat-hint>
+      </mat-form-field>
+</form>
+<button mat-raised-button (click)="onSubmit()">Add</button>
+<button mat-raised-button (click)="onClose()">Close</button>
