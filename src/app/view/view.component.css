@@ -43,3 +43,7 @@ div.needPassword h1 {
     top: 10px;
     cursor: pointer;
 }
+
+.marker .name {
+    color: #7b1fa2;
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from 'selenium-webdriver/http';
 import { CodeService } from '../services/code.service';
@@ -11,7 +11,8 @@ import { Subscription } from 'rxjs/Subscription';
   selector: 'app-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css'],
-  providers: [CodeService]
+  providers: [CodeService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewComponent implements OnDestroy {
   public channel: any;
@@ -41,8 +42,18 @@ export class ViewComponent implements OnDestroy {
       this.chat = data.result.chat;
     }
 
+    this.changeDetectorRef.markForCheck();
+
     if (data.result.markers && data.result.markers.length) {
       setTimeout(() => {
+        this.editor.getEditor().session.on('changeScrollTop', () => {
+          console.log('scroll top');
+          this.redrawMarkers();
+        });
+        this.editor.getEditor().session.on('changeScrollLeft', () => {
+          console.log('scroll left');
+          this.redrawMarkers();
+        });
         data.result.markers.forEach(marker => {
           this.addMarker(marker.lineNumber, marker.column, marker.name, marker.message);
         });
@@ -55,7 +66,8 @@ export class ViewComponent implements OnDestroy {
     private router: ActivatedRoute,
     private codeService: CodeService,
     private route: Router,
-    private webSocketService: WebsocketService) {
+    private webSocketService: WebsocketService,
+    private changeDetectorRef: ChangeDetectorRef) {
     this.router.params.subscribe(params => {
       this.channel = params['code'];
 
@@ -101,13 +113,25 @@ export class ViewComponent implements OnDestroy {
     });
   }
 
+  private redrawMarkers() {
+    this.markers.forEach(marker => {
+      const coord = this.editor.getEditor().renderer.textToScreenCoordinates(marker.lineNumber, marker.column);
+      marker.x = coord.pageX + 5;
+      marker.y = coord.pageY - 12;
+    });
+
+    this.changeDetectorRef.markForCheck();
+    this.changeDetectorRef.detectChanges();
+  }
+
   private addMarker(lineNumber, column, name, message) {
     if (this.editor === undefined) {
       return false;
     }
 
     const coord = this.editor.getEditor().renderer.textToScreenCoordinates(lineNumber, column);
-    this.markers.push({ x: coord.pageX + 5, y: coord.pageY - 12, name: name, message: message });
+    this.markers.push({ x: coord.pageX + 5, y: coord.pageY - 12, name: name, message: message, lineNumber: lineNumber, column: column });
+    this.changeDetectorRef.markForCheck();
   }
 
   public setPassword() {

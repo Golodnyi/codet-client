@@ -11,7 +11,7 @@
 <div [hidden]="needPassword || !code">
     <div *ngFor="let marker of markers" class="marker" [style.left.px]="marker.x" [style.top.px]="marker.y">
         <i class="material-icons flag">bookmark</i>
-        <i class="text">{{marker.name}}: {{marker.message}}</i>
+        <i class="text"><span class="name">{{marker.name}}</span>: {{marker.message}}</i>
     </div>
     <app-comment [comment]="comment"></app-comment>
     <ace-editor *ngIf="lang && code" (click)="openMarkerDialog()" #editor [text]="code" [mode]="lang" [theme]="'pastel_on_dark'" [readOnly]="false"></ace-editor>
