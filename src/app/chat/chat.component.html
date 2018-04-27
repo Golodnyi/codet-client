@@ -17,7 +17,7 @@
         <input matInput #message name="message" placeholder="Message" maxlength="256" [(ngModel)]="text">
         <mat-hint align="end">{{message.value.length}} / 256</mat-hint>
       </mat-form-field>
-      <button mat-raised-button color="primary">send</button>
+      <button mat-raised-button [disabled]="!message.value.length" color="primary">Send</button>
     </form>
   </div>
 </div>
