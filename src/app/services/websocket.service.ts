@@ -36,14 +36,11 @@ export class WebsocketService {
     this.ws = new WebSocket(environment.websocket);
 
     this.ws.onopen = msg => {
-      console.log('service', 'onOpen');
       this.onOpen.next(msg);
     };
 
     this.ws.onclose = msg => {
-      console.log('service', 'onClose');
       this.timerSubscription = this.timer.subscribe(() => {
-        console.log('service', 'Reconnect');
         this.connect();
       });
 
@@ -51,7 +48,6 @@ export class WebsocketService {
     };
 
     this.ws.onmessage = msg => {
-      console.log('service', 'onMessage', msg);
       this.onMessage.next(msg);
     };
   }
@@ -63,7 +59,6 @@ export class WebsocketService {
       channel: channel
     };
 
-    console.log('service', 'send');
     this.ws.send(JSON.stringify(data));
   }
 
@@ -76,7 +71,6 @@ export class WebsocketService {
       column: column
     };
 
-    console.log('service', 'send');
     this.ws.send(JSON.stringify(data));
   }
 }

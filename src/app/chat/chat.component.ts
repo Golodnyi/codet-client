@@ -32,7 +32,6 @@ export class ChatComponent implements OnInit, OnDestroy {
         if (!open) {
           return false;
         }
-        console.log('chat', 'onOpen');
       })
     );
 
@@ -41,7 +40,6 @@ export class ChatComponent implements OnInit, OnDestroy {
         if (!close) {
           return false;
         }
-        console.log('chat', 'onClose');
         this.messages.push({ name: 'System', message: 'You are disconect' });
       })
     );
@@ -51,7 +49,6 @@ export class ChatComponent implements OnInit, OnDestroy {
         if (!msg) {
           return false;
         }
-        console.log('chat', 'onMessage');
         const data = JSON.parse(msg.data);
 
         switch (data.type) {

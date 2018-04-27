@@ -46,7 +46,7 @@ export class ViewComponent implements OnDestroy {
         data.result.markers.forEach(marker => {
           this.addMarker(marker.lineNumber, marker.column, marker.name, marker.message);
         });
-      }, 200);
+      }, 1000);
     }
   }
 
@@ -66,7 +66,6 @@ export class ViewComponent implements OnDestroy {
           if (!open) {
             return false;
           }
-          console.log('view', 'send join request');
           this.webSocketService.send(this.channel, 1, JSON.stringify({ type: 1, channel: this.channel }));
         })
       );
@@ -76,7 +75,6 @@ export class ViewComponent implements OnDestroy {
           if (!msg) {
             return false;
           }
-          console.log('view', 'onMessage');
 
           const data = JSON.parse(msg.data);
 
