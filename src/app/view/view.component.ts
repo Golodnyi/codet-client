@@ -116,7 +116,8 @@ export class ViewComponent implements OnDestroy {
 
   private redrawMarkers() {
     this.markers.forEach(marker => {
-      const coord = this.editor.getEditor().renderer.textToScreenCoordinates(marker.lineNumber, marker.column);
+      const code = this.editor.getEditor().session.doc.$lines[marker.lineNumber];
+      const coord = this.editor.getEditor().renderer.textToScreenCoordinates(marker.lineNumber, code.length);
       marker.x = coord.pageX + 5;
       marker.y = coord.pageY - 12;
     });
@@ -130,7 +131,8 @@ export class ViewComponent implements OnDestroy {
       return false;
     }
 
-    const coord = this.editor.getEditor().renderer.textToScreenCoordinates(lineNumber, column);
+    const code = this.editor.getEditor().session.doc.$lines[lineNumber];
+    const coord = this.editor.getEditor().renderer.textToScreenCoordinates(lineNumber, code.length);
     this.markers.push({ x: coord.pageX + 5, y: coord.pageY - 12, name: name, message: message, lineNumber: lineNumber, column: column });
     this.changeDetectorRef.markForCheck();
   }
