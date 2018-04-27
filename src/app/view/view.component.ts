@@ -66,8 +66,8 @@ export class ViewComponent implements OnDestroy {
   }
 
   public hiddenMarker(x: number, y: number, marker: any) {
-    const width =  this.editor.getEditor().renderer.$size.width;
-    const height =  this.editor.getEditor().renderer.$size.height;
+    const width = this.editor.getEditor().renderer.$size.width;
+    const height = this.editor.getEditor().renderer.$size.height;
     const widthVisible = x - width <= 0;
     const heightVisible = y - height <= 0;
 
@@ -144,6 +144,8 @@ export class ViewComponent implements OnDestroy {
       return false;
     }
 
+    this.deleteMarkerByLine(lineNumber);
+
     const code = this.editor.getEditor().session.doc.$lines[lineNumber];
     const coord = this.editor.getEditor().renderer.textToScreenCoordinates(lineNumber, code.length);
     this.markers.push({ x: coord.pageX + 5, y: coord.pageY - 12, name: name, message: message, lineNumber: lineNumber, column: column });
@@ -218,10 +220,6 @@ export class ViewComponent implements OnDestroy {
     dialogRef.afterClosed().subscribe(msgMarker => {
       if (msgMarker) {
         this.webSocketService.setMarker(this.channel, row, column, msgMarker);
-
-        if (replace) {
-          this.deleteMarkerByLine(row);
-        }
       }
     });
   }
