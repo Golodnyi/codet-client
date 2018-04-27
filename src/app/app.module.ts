@@ -48,7 +48,6 @@ import { UrlComponent } from './modals/url/url.component';
 import { CommentComponent } from './comment/comment.component';
 import { CommentComponent as CommentModalComponent } from './modals/comment/comment.component';
 import { MarkerComponent } from './modals/marker/marker.component';
-import { WebsocketService } from './services/websocket.service';
 import { MarkerExistComponent } from './modals/marker-exist/marker-exist.component';
 
 const appRoutes: Routes = [
@@ -108,7 +107,7 @@ const appRoutes: Routes = [
     MatDialogModule,
     MatExpansionModule
   ],
-  providers: [HttpClient, WebsocketService],
+  providers: [HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

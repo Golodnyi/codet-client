@@ -12,7 +12,7 @@ import { MarkerExistComponent } from '../modals/marker-exist/marker-exist.compon
   selector: 'app-view',
   templateUrl: './view.component.html',
   styleUrls: ['./view.component.css'],
-  providers: [CodeService],
+  providers: [CodeService, WebsocketService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewComponent implements OnDestroy {
