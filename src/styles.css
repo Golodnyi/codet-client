@@ -3,6 +3,7 @@
 body {
     margin: 0;
     background-color: #353030;
+    overflow: hidden;
 }
 
 .mat-chip-list-stacked .mat-chip-list-wrapper .mat-chip:not(.mat-basic-chip) {
