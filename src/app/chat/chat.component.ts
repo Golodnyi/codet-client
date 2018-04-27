@@ -54,6 +54,8 @@ export class ChatComponent implements OnInit, OnDestroy {
         switch (data.type) {
           case 0:
             this.messages.push(data);
+            this.newMessage = !this.newMessage;
+            this.messageEmmiter.emit(this.newMessage);
             break;
           case 1:
             if (data.result === 'ok') {
@@ -63,9 +65,6 @@ export class ChatComponent implements OnInit, OnDestroy {
             }
             break;
         }
-
-        this.newMessage = !this.newMessage;
-        this.messageEmmiter.emit(this.newMessage);
 
         setTimeout(() => {
           this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight;
