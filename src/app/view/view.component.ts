@@ -105,6 +105,7 @@ export class ViewComponent implements OnDestroy {
         error => {
           if (error.status === 401) {
             this.needPassword = true;
+            this.changeDetectorRef.markForCheck();
           } else if (error.status === 404) {
             this.route.navigate(['/404']);
           }
