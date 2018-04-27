@@ -1,9 +1,14 @@
 <div class="chat">
   <div #chatLog class="messages">
     <mat-list role="list">
-      <mat-list-item role="listitem" class="msg" *ngFor="let message of messages">
-        <span class="name">{{message.name}}</span>: {{message.message}}
-      </mat-list-item>
+      <div class="msg" *ngFor="let message of messages">
+        <mat-list-item role="listitem">
+          <div class="name">{{message.name}}</div>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+        <div>{{message.message}}</div>
+        </mat-list-item>
+      </div>
     </mat-list>
   </div>
   <div class="message">
