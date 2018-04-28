@@ -22,6 +22,9 @@ div.needPassword h1 {
     position: absolute;
     color: rgb(224, 215, 215);
     z-index: 3;
+    word-wrap: normal;
+    word-break: normal;
+    width: 100%;
 }
 
 .marker .text {
