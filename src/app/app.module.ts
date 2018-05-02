@@ -26,6 +26,8 @@ import 'brace/mode/csharp';
 import 'brace/mode/rust';
 import 'brace/mode/golang';
 import 'brace/mode/erlang';
+import 'brace/mode/kotlin';
+import 'brace/mode/java';
 import 'brace/mode/sql';
 import 'brace/mode/php';
 import 'brace/mode/javascript';
