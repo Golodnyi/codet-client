@@ -33,6 +33,7 @@ import 'brace/mode/php';
 import 'brace/mode/perl';
 import 'brace/mode/ruby';
 import 'brace/mode/scala';
+import 'brace/mode/swift';
 import 'brace/mode/javascript';
 import 'brace/mode/typescript';
 import 'brace/mode/python';
