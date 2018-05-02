@@ -21,6 +21,7 @@ export class LanguageComponent implements OnInit {
     this.langList.push({ name: 'C#', value: 'csharp' });
     this.langList.push({ name: 'Go', value: 'golang' });
     this.langList.push({ name: 'Rust', value: 'rust' });
+    this.langList.push({ name: 'Erlang', value: 'erlang' });
     this.langList.push({ name: 'PHP', value: 'php' });
     this.langList.push({ name: 'JavaScript', value: 'javascript' });
     this.langList.push({ name: 'TypeScript', value: 'typescript' });

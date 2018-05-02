@@ -25,6 +25,7 @@ import 'brace/mode/c_cpp';
 import 'brace/mode/csharp';
 import 'brace/mode/rust';
 import 'brace/mode/golang';
+import 'brace/mode/erlang';
 import 'brace/mode/sql';
 import 'brace/mode/php';
 import 'brace/mode/javascript';
