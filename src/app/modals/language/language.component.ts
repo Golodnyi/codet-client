@@ -25,6 +25,9 @@ export class LanguageComponent implements OnInit {
     this.langList.push({ name: 'Kotlin', value: 'kotlin' });
     this.langList.push({ name: 'Java', value: 'java' });
     this.langList.push({ name: 'PHP', value: 'php' });
+    this.langList.push({ name: 'Perl', value: 'perl' });
+    this.langList.push({ name: 'Ruby', value: 'ruby' });
+    this.langList.push({ name: 'Scala', value: 'scala' });
     this.langList.push({ name: 'JavaScript', value: 'javascript' });
     this.langList.push({ name: 'TypeScript', value: 'typescript' });
     this.langList.push({ name: 'Python', value: 'python' });
