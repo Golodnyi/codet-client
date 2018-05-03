@@ -5,6 +5,7 @@ import { LanguageComponent } from '../modals/language/language.component';
 import { MatDialog } from '@angular/material';
 import { PasswordComponent } from '../modals/password/password.component';
 import { CommentComponent } from '../modals/comment/comment.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
@@ -21,8 +22,8 @@ export class FooterComponent {
   public pwd: any = false;
   public comment: any;
 
-  constructor(public dialog: MatDialog) {
-    this.setLanguage({name: 'C++', value: 'c_cpp'});
+  constructor(public dialog: MatDialog, private router: Router) {
+    this.setLanguage({ name: 'C++', value: 'c_cpp' });
   }
 
   public setLanguage(lang) {
@@ -74,5 +75,9 @@ export class FooterComponent {
         this.setComment(comment);
       }
     });
+  }
+
+  public openFeedbackDialog() {
+    window.location.href = 'https://github.com/codet-app/codet-client/issues';
   }
 }
