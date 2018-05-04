@@ -1,9 +1,9 @@
 <form (submit)="onSubmit()">
   <mat-form-field class="full-width">
     <textarea matInput name="comment" placeholder="Comment" matTextareaAutosize matAutosizeMinRows="5"
-            matAutosizeMaxRows="10" maxlength="1024" #message [(ngModel)]="comment"></textarea>
-            <mat-hint align="end">{{message.value.length}} / 1024</mat-hint>
+            matAutosizeMaxRows="10" maxlength="1024" #commentMessage [(ngModel)]="comment">{{comment}}</textarea>
+            <mat-hint align="end">{{commentMessage.value.length}} / 1024</mat-hint>
   </mat-form-field>
 </form>
-<button mat-raised-button color="primary" (click)="onSubmit()">Save</button>
+<button mat-raised-button color="primary" [disabled]="!commentMessage.value.length" (click)="onSubmit()">Save</button>
 <button mat-raised-button (click)="onCancel()">Cancel</button>

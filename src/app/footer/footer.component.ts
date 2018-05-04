@@ -20,7 +20,7 @@ export class FooterComponent {
   public showFiller = false;
   public lang: any;
   public pwd: any = false;
-  public comment: any;
+  public comment: any = false;
 
   constructor(public dialog: MatDialog, private router: Router) {
     this.setLanguage({ name: 'C++', value: 'c_cpp' });
@@ -55,7 +55,10 @@ export class FooterComponent {
 
   public openPasswordDialog(): void {
     const dialogRef = this.dialog.open(PasswordComponent, {
-      width: '250px'
+      width: '250px',
+      data: {
+        password: this.pwd,
+      }
     });
 
     dialogRef.afterClosed().subscribe(pwd => {
@@ -67,7 +70,10 @@ export class FooterComponent {
 
   public openCommentDialog(): void {
     const dialogRef = this.dialog.open(CommentComponent, {
-      width: '350px'
+      width: '350px',
+      data: {
+        comment: this.comment,
+      }
     });
 
     dialogRef.afterClosed().subscribe(comment => {
