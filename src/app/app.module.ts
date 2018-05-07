@@ -19,7 +19,7 @@ import { MatInputModule } from '@angular/material';
 import { MatExpansionModule } from '@angular/material/expansion';
 
 import 'brace';
-import 'brace/theme/pastel_on_dark';
+import 'brace/theme/ambiance';
 import 'brace/mode/sh';
 import 'brace/mode/c_cpp';
 import 'brace/mode/csharp';

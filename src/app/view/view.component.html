@@ -14,7 +14,7 @@
         <i class="text"><span class="name">{{marker.name}}</span>: {{marker.message}}</i>
     </div>
     <app-comment [comment]="comment"></app-comment>
-    <ace-editor *ngIf="lang && code" (click)="openMarkerDialog()" #editor [text]="code" [mode]="lang" [theme]="'pastel_on_dark'" [readOnly]="true"></ace-editor>
+    <ace-editor *ngIf="lang && code" (click)="openMarkerDialog()" #editor [text]="code" [mode]="lang" [theme]="'ambiance'" [readOnly]="true"></ace-editor>
     <app-chat *ngIf="lang && code" (messageEmmiter)="onMessage($event)" [chat]="chat" [hidden]="!show" [channel]="channel"></app-chat>
     <app-sidebar [new]="newMessage" [channel]="channel" (chatEmmiter)="showChat($event)"></app-sidebar>
 </div>
